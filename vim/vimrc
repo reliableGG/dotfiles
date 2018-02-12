@@ -138,6 +138,9 @@ Plugin 'vim-scripts/Markdown'
 Plugin 'tpope/vim-surround'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'ConradIrwin/vim-bracketed-paste' " 使用bracketed-paste mode，粘贴代码时避免格式化
+
+"Plugin 'Yggdroot/indentLine' "  缩进线条
+"Plugin 'SuperTab'
 " 插件列表结束
 call vundle#end()
 filetype on
@@ -257,3 +260,12 @@ noremap <Leader>sj :IndentGuidesToggle<CR>
 " 每行不能超过80字符，否则高亮显示
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%80v.\+/
+
+" 缩进线条相关配置
+"let g:indentLine_showFirstIndentLevel = 1
+"let g:indentLine_setColors = 0
+"
+"let g:SuperTabRetainCompletionType=2
+
+
+
