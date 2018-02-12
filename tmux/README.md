@@ -17,3 +17,6 @@ You need do nothing except executing following setup script:
 ```bash
 ./setup.sh
 ```
+
+
+配置完以后使用 alias tmux="tmux -2",解决vim显示问题
