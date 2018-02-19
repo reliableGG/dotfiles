@@ -653,5 +653,3 @@
 
  let g:vcool_ins_rgba_map = '<leader>cpra' " Insert rgba color.
 
-
-
