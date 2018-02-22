@@ -25,7 +25,7 @@ set laststatus=2 "总是显示状态栏
 set ruler "显示光标位置
 set number "显示行号
 set cursorline "高亮显示当前行
-"set cursorcolumn "高亮显示当前列
+set cursorcolumn "高亮显示当前列
 set hlsearch "高亮显示搜索结果
 " set nowrap "禁止折行
 set backspace=2 "回退键生效
@@ -191,7 +191,7 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'walm/jshint.vim'
 Plugin 'moll/vim-node'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'Yggdroot/indentLine'
+"Plugin 'Yggdroot/indentLine'
 Plugin 'nvie/vim-flake8'
 if has('python')
     Plugin 'davidhalter/jedi-vim'
@@ -438,7 +438,7 @@ let g:jedi#completions_command = "<C-n>"
 " flake8
 let g:flake8_show_in_file = 1
 let g:flake8_show_in_gutter = 1
-autocmd! BufRead,BufWritePost *.py call Flake8()
+" autocmd! BufRead,BufWritePost *.py call Flake8()
 "gitgutter
 "let g:gitgutter_sign_modified = '*'
 let g:gitgutter_sign_removed = '-'
@@ -494,8 +494,8 @@ inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
 "youcompleteme  默认tab  s-tab 和自动补全冲突
-""let g:ycm_key_list_select_completion=['<c-n>']
-let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_select_completion=['<c-n>']
+"let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 "let g:ycm_key_list_previous_completion = ['<Up>']
 "let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
@@ -513,7 +513,7 @@ let g:ycm_key_list_select_completion = ['<Down>']
 ""在注释输入中也能补全
 let g:ycm_complete_in_comments = 1
 "在字符串输入中也能补全
-"let g:ycm_complete_in_strings = 1
+let g:ycm_complete_in_strings = 1
 ""注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 
