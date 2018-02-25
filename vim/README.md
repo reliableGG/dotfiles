@@ -38,3 +38,5 @@ Or open vim and type following command on normal mode:
 cd ~/.vim/bundle/YouCompleteMe
 ./install.sh
 ```
+
+look at git@github.com:reliableGG/YouCompleteMe.git
