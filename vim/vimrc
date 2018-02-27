@@ -48,7 +48,7 @@ set smartindent
 set showcmd " 在状态栏显示正在输入的命令
 set showmatch " 显示括号配对情况
 
-set mouse=a
+"set mouse=a
 set ff=unix " dos2unix
 set nocompatible "say no to vi"
 
@@ -171,10 +171,10 @@ Plugin 'vim-scripts/ShowTrailingWhitespace.git' "高亮显示行尾的多余空�
 Plugin 'vim-scripts/indentpython.vim.git'
 Plugin 'vim-scripts/Solarized.git' "主题方案
 Plugin 'nathanaelkane/vim-indent-guides.git' "缩进对齐显示
-"Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
-"Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
-"Plugin 'vim-scripts/vimprj' "indexer 依赖
-Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
+Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
+Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
+Plugin 'vim-scripts/vimprj' "indexer 依赖
+"Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
 Plugin 'vim-scripts/Markdown'
 Plugin 'tpope/vim-surround'
 Plugin 'ekalinin/Dockerfile.vim'
@@ -334,7 +334,7 @@ match OverLength /\%80v.\+/
 "let g:SuperTabRetainCompletionType=2
 
 " dos2unix
-" set ff=unix
+set ff=unix
 
 """"""""""""""""""""""""KEY MAPPING""""""""""""""""""""
 " 映射切换buffer的键位
@@ -438,7 +438,7 @@ let g:jedi#completions_command = "<C-n>"
 " flake8
 let g:flake8_show_in_file = 1
 let g:flake8_show_in_gutter = 1
-" autocmd! BufRead,BufWritePost *.py call Flake8()
+autocmd! BufRead,BufWritePost *.py call Flake8()
 "gitgutter
 "let g:gitgutter_sign_modified = '*'
 let g:gitgutter_sign_removed = '-'
@@ -487,28 +487,27 @@ set completeopt=longest,menu    "让Vim的补全菜单行为与一般IDE一致(�
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
 "上下左右键的行为 会显示其他信息
-"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" :
-""\<PageDown>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" :"\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
 "youcompleteme  默认tab  s-tab 和自动补全冲突
-let g:ycm_key_list_select_completion=['<c-n>']
-"let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
-"let g:ycm_key_list_previous_completion = ['<Up>']
-"let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-"
-"let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-"let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
-"let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
-"let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+
+let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
+let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
 "nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with
 "syntastic
 ""nnoremap <leader>lo :lopen<CR> "open locationlist
 "nnoremap <leader>lc :lclose<CR>    "close locationlist
-"inoremap <leader><leader> <C-x><C-o>
+inoremap <leader><leader> <C-x><C-o>
 "
 ""在注释输入中也能补全
 let g:ycm_complete_in_comments = 1
