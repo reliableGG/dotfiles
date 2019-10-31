@@ -14,6 +14,7 @@ syntax enable
 " 允许用指定语法高亮配色方案替换默认方案
 syntax on
 
+set maxmempattern=100000 "设置内存
 set nocompatible "关闭兼容模式
 set incsearch "开启实时搜索功能
 set ignorecase "搜索时忽略大小写
@@ -48,7 +49,7 @@ set smartindent
 set showcmd " 在状态栏显示正在输入的命令
 set showmatch " 显示括号配对情况
 
-" set mouse=a
+"set mouse=a
 set ff=unix " dos2unix
 set nocompatible "say no to vi"
 
@@ -171,10 +172,10 @@ Plugin 'vim-scripts/ShowTrailingWhitespace.git' "高亮显示行尾的多余空�
 Plugin 'vim-scripts/indentpython.vim.git'
 Plugin 'vim-scripts/Solarized.git' "主题方案
 Plugin 'nathanaelkane/vim-indent-guides.git' "缩进对齐显示
-"Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
-"Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
-"Plugin 'vim-scripts/vimprj' "indexer 依赖
-Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
+Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
+Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
+Plugin 'vim-scripts/vimprj' "indexer 依赖
+"Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
 Plugin 'vim-scripts/Markdown'
 Plugin 'tpope/vim-surround'
 Plugin 'ekalinin/Dockerfile.vim'
@@ -205,6 +206,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'honza/vim-snippets'
 Plugin 'bling/vim-airline'
+Plugin 'fatih/vim-go'
 "Plugin 'Yggdroot/indentLine' "  缩进线条
 "Plugin 'SuperTab'
 " 插件列表结束
@@ -266,32 +268,6 @@ let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
 
-" YCM 补全菜单配色
-" 菜单
-highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
-" 选中项
-highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
-" 补全功能在注释中同样有效
-let g:ycm_complete_in_comments=1
-" 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
-let g:ycm_confirm_extra_conf=0
-" 开启 YCM 标签补全引擎
-let g:ycm_collect_identifiers_from_tags_files=1
-" 引入 C++ 标准库tags
-set tags+=/data/misc/software/misc./vim/stdcpp.tags
-" YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
-inoremap <leader>; <C-x><C-o>
-" 补全内容不以分割子窗口形式出现，只显示补全列表
-set completeopt-=preview
-" 从第一个键入字符就开始罗列匹配项
-let g:ycm_min_num_of_chars_for_completion=1
-" 禁止缓存匹配项，每次都重新生成匹配项
-let g:ycm_cache_omnifunc=0
-" 语法关键字补全
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-
-
 """ color settings
 set t_Co=256
 if has("gui_running")
@@ -324,8 +300,8 @@ let g:indent_guides_guide_size=1
 noremap <Leader>sj :IndentGuidesToggle<CR>
 
 " 每行不能超过80字符，否则高亮显示
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%80v.\+/
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%80v.\+/
 
 " 缩进线条相关配置
 "let g:indentLine_showFirstIndentLevel = 1
@@ -334,7 +310,7 @@ match OverLength /\%80v.\+/
 "let g:SuperTabRetainCompletionType=2
 
 " dos2unix
-" set ff=unix
+set ff=unix
 
 """"""""""""""""""""""""KEY MAPPING""""""""""""""""""""
 " 映射切换buffer的键位
@@ -438,7 +414,7 @@ let g:jedi#completions_command = "<C-n>"
 " flake8
 let g:flake8_show_in_file = 1
 let g:flake8_show_in_gutter = 1
-" autocmd! BufRead,BufWritePost *.py call Flake8()
+autocmd! BufRead,BufWritePost *.py call Flake8()
 "gitgutter
 "let g:gitgutter_sign_modified = '*'
 let g:gitgutter_sign_removed = '-'
@@ -482,6 +458,35 @@ let g:clojure_syntax_keywords = {
 " vim-clojure-highlight
 autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
 
+" YCM 补全菜单配色
+" 菜单
+highlight Pmenu ctermfg=244 ctermbg=234 guifg=#005f87 guibg=#EEE8D5
+" highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#005f87
+" 选中项
+highlight PmenuSel ctermfg=244 ctermbg=234 guifg=#AFD700 guibg=#106900
+" highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#005f87
+" 补全功能在注释中同样有效
+let g:ycm_complete_in_comments=1
+" 禁止 vim 加载 .ycm_extra_conf.py 文件，不再提示
+let g:ycm_confirm_extra_conf=0
+" 开启 YCM 标签补全引擎
+let g:ycm_collect_identifiers_from_tags_files=1
+" 引入 C++ 标准库tags
+" set tags+=/data/misc/software/misc./vim/stdcpp.tags
+" YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
+inoremap <leader>; <C-x><C-o>
+inoremap <leader><leader> <C-x><C-o>
+" 补全内容不以分割子窗口形式出现，只显示补全列表
+set completeopt-=preview
+" 从第一个键入字符就开始罗列匹配项
+let g:ycm_min_num_of_chars_for_completion=1
+" 禁止缓存匹配项，每次都重新生成匹配项
+let g:ycm_cache_omnifunc=0
+" 语法关键字补全
+let g:ycm_seed_identifiers_with_syntax=1
+""注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"
 " 自动补全配置
 set completeopt=longest,menu    "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
@@ -489,32 +494,39 @@ inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中
 "上下左右键的行为 会显示其他信息
 "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" :
-""\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" :"\<PageDown>"
+"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
 "youcompleteme  默认tab  s-tab 和自动补全冲突
-""let g:ycm_key_list_select_completion=['<c-n>']
+"let g:ycm_key_list_select_completion=['<c-n>']
 let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
-"let g:ycm_key_list_previous_completion = ['<Up>']
-"let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-"
-"let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-"let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
-"let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
-"let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
+let g:ycm_key_list_previous_completion = ['<Up>']
+
 "nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with
 "syntastic
 ""nnoremap <leader>lo :lopen<CR> "open locationlist
 "nnoremap <leader>lc :lclose<CR>    "close locationlist
-"inoremap <leader><leader> <C-x><C-o>
 "
-""在注释输入中也能补全
-let g:ycm_complete_in_comments = 1
-"在字符串输入中也能补全
-"let g:ycm_complete_in_strings = 1
-""注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
 
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
+let g:go_def_mode = 'guru'
+
+"==============================================================================
+" vim-go 插件
+"==============================================================================
+let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+
+let g:go_version_warning = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_generate_tags = 1
+
+let g:godef_split=2
